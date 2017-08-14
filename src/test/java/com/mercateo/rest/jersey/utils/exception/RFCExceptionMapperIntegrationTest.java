@@ -21,7 +21,7 @@ public class RFCExceptionMapperIntegrationTest extends JerseyTest {
 	@Path("/")
 	public static final class TestResource {
 		@GET
-		public void TestExcpetion() {
+		public void TestException() {
 			throw new BadRequestException("hello");
 		}
 	}
