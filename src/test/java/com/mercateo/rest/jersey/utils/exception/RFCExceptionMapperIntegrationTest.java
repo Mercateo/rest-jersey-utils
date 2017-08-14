@@ -17,7 +17,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-public class RfcExceptionMapperIntegrationTest extends JerseyTest {
+public class RFCExceptionMapperIntegrationTest extends JerseyTest {
 	@Path("/")
 	public static final class TestResource {
 		@GET
