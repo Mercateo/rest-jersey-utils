@@ -2,5 +2,5 @@
 
 
 
-A package for usefull java classes for jersey, including:
+A package for useful java classes for jersey, including:
 * RFC-7807 compliant ExceptionMapper
