@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -21,7 +19,6 @@ public class OriginFilter {
 	@NonNull
 	private final List<String> allowedOriginHosts;
 
-	@VisibleForTesting
 	public OriginFilter() {
 		allowedOriginHosts = new ArrayList<>();
 		allowedOrigins = new ArrayList<>();
