@@ -19,9 +19,8 @@ public class OriginFilter {
 	@NonNull
 	private final List<String> allowedOriginHosts;
 
-	public OriginFilter() {
-		allowedOriginHosts = new ArrayList<>();
-		allowedOrigins = new ArrayList<>();
+	protected OriginFilter() {
+		this(new ArrayList<>(), new ArrayList<>());
 	}
 
 	public boolean isOriginAllowed(@NonNull String originHeaderField) {
