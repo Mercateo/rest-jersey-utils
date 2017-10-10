@@ -23,7 +23,9 @@ public class SimpleAccessControlAllowHeaderFilterIntegrationTest extends JerseyT
 
 	@Override
 	protected Application configure() {
-		return new ResourceConfig(TestResource.class, JacksonFeature.class, SimpleAccessControlAllowHeaderFilter.class);
+		ResourceConfig rs = new ResourceConfig(TestResource.class, JacksonFeature.class);
+		rs.register(new SimpleAccessControlAllowHeaderFilter());
+		return rs;
 	}
 
 	@Test
