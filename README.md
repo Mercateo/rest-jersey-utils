@@ -4,3 +4,4 @@
 
 A package for useful java classes for jersey, including:
 * RFC-7807 compliant ExceptionMapper
+* Simple filter for CORS (see e.g. https://spring.io/understanding/CORS)
