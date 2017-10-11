@@ -36,8 +36,8 @@ public class CorsFeatureIntegrationTest extends JerseyTest {
 	protected Application configure() {
 		ResourceConfig rs = new ResourceConfig(TestResource.class, JacksonFeature.class);
 
-		CORSFeature corsFeature = new CORSFeature(Lists.newArrayList(new URL("http://localhost:8080")),
-				Lists.newArrayList("0.0.0.0"));
+		CORSFeature corsFeature = new CORSFeature(new OriginFilter.Default(
+				Lists.newArrayList(new URL("http://localhost:8080")), Lists.newArrayList("0.0.0.0")));
 		rs.register(corsFeature);
 		return rs;
 	}

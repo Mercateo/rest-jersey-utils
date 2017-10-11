@@ -1,6 +1,5 @@
 package com.mercateo.rest.jersey.utils.cors;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,24 +10,20 @@ import lombok.NonNull;
 
 public class CORSFeature implements Feature {
 
-	private List<String> allowedHeaders;
-	private List<String> allowedOriginHosts;
-	private List<URL> allowedOrigins;
+	private final List<String> allowedHeaders;
+	private final OriginFilter originFilter;
 
-	public CORSFeature(@NonNull List<String> allowedHeaders, @NonNull List<URL> allowedOrigins,
-			@NonNull List<String> allowedOriginHosts) {
-		this.allowedOrigins = allowedOrigins;
-		this.allowedOriginHosts = allowedOriginHosts;
+	public CORSFeature(@NonNull List<String> allowedHeaders, OriginFilter originFilter) {
+		this.originFilter = originFilter;
 		this.allowedHeaders = allowedHeaders;
 	}
 
-	public CORSFeature(@NonNull List<URL> allowedOrigins, @NonNull List<String> allowedOriginHosts) {
-		this(new ArrayList<>(), allowedOrigins, allowedOriginHosts);
+	public CORSFeature(OriginFilter originFilter) {
+		this(new ArrayList<>(), originFilter);
 	}
 
 	@Override
 	public boolean configure(FeatureContext context) {
-		OriginFilter originFilter = new OriginFilter(allowedOrigins, allowedOriginHosts);
 		boolean modified = false;
 		AccessControlAllowOriginRequestFilter accessControlAllowOriginRequestFilter = new AccessControlAllowOriginRequestFilter(
 				originFilter);

@@ -14,7 +14,7 @@ public class OriginFilterTest {
 	@Test
 	public void testIsOriginAllowedString() throws Exception {
 
-		OriginFilter originFilter = new OriginFilter(Lists.newArrayList(new URL("http://localhost:8080")),
+		OriginFilter originFilter = new OriginFilter.Default(Lists.newArrayList(new URL("http://localhost:8080")),
 				Lists.newArrayList("0.0.0.0"));
 		assertTrue(originFilter.isOriginAllowed("http://localhost:8080"));
 		assertTrue(originFilter.isOriginAllowed("http://0.0.0.0:8080"));
@@ -25,7 +25,7 @@ public class OriginFilterTest {
 
 	@Test
 	public void testIsOriginAllowedURL() throws Exception {
-		OriginFilter originFilter = new OriginFilter(Lists.newArrayList(new URL("http://localhost:8080")),
+		OriginFilter originFilter = new OriginFilter.Default(Lists.newArrayList(new URL("http://localhost:8080")),
 				Lists.newArrayList("0.0.0.0"));
 		assertTrue(originFilter.isOriginAllowed(new URL("http://localhost:8080")));
 		assertTrue(originFilter.isOriginAllowed(new URL("http://0.0.0.0:8080")));
