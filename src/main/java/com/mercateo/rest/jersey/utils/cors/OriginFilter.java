@@ -22,7 +22,7 @@ public interface OriginFilter {
 
 	public boolean isOriginAllowed(URL origin);
 
-	@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
+	@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 	@EqualsAndHashCode
 	public static class Default implements OriginFilter {
 		@NonNull
