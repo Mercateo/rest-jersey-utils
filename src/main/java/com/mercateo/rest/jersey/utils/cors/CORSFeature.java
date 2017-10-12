@@ -13,12 +13,12 @@ public class CORSFeature implements Feature {
 	private final List<String> allowedHeaders;
 	private final OriginFilter originFilter;
 
-	public CORSFeature(@NonNull List<String> allowedHeaders, OriginFilter originFilter) {
+	public CORSFeature(@NonNull List<String> allowedHeaders, @NonNull OriginFilter originFilter) {
 		this.originFilter = originFilter;
 		this.allowedHeaders = allowedHeaders;
 	}
 
-	public CORSFeature(OriginFilter originFilter) {
+	public CORSFeature(@NonNull OriginFilter originFilter) {
 		this(new ArrayList<>(), originFilter);
 	}
 
