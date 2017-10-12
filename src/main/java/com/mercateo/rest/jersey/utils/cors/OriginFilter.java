@@ -31,6 +31,7 @@ public interface OriginFilter {
 		@NonNull
 		private final List<String> allowedOriginHosts;
 
+		@Override
 		public boolean isOriginAllowed(@NonNull URL origin) {
 			return allowedOrigins.contains(origin) || allowedOriginHosts.contains(origin.getHost());
 		}
