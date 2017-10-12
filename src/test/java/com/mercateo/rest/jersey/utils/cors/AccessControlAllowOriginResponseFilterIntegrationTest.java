@@ -49,7 +49,6 @@ public class AccessControlAllowOriginResponseFilterIntegrationTest extends Jerse
 	public void getWithoutFalseOriginSet() {
 		when(originFilter.isOriginAllowed(anyString())).thenReturn(false);
 		Response resp = target("/").request().header("Origin", "http://localhost:8080").get();
-		assertEquals(400, resp.getStatus());
 		assertNull(resp.getHeaders().get("Access-Control-Allow-Origin"));
 	}
 
