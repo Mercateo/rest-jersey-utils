@@ -3,11 +3,10 @@ package com.mercateo.rest.jersey.utils.cors;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 public interface OriginFilter {
 
@@ -22,18 +21,22 @@ public interface OriginFilter {
 
 	public boolean isOriginAllowed(URL origin);
 
-	@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 	@EqualsAndHashCode
 	public static class Default implements OriginFilter {
 		@NonNull
-		private final List<URL> allowedOrigins;
+		private final List<String> allowedOrigins;
 
 		@NonNull
 		private final List<String> allowedOriginHosts;
 
 		@Override
 		public boolean isOriginAllowed(@NonNull URL origin) {
-			return allowedOrigins.contains(origin) || allowedOriginHosts.contains(origin.getHost());
+			return allowedOrigins.contains(origin.toExternalForm()) || allowedOriginHosts.contains(origin.getHost());
+		}
+
+		public Default(@NonNull List<URL> allowedOrigins, @NonNull List<String> allowedOriginHosts) {
+			this.allowedOrigins = allowedOrigins.stream().map(URL::toExternalForm).collect(Collectors.toList());
+			this.allowedOriginHosts = allowedOriginHosts;
 		}
 
 	}
