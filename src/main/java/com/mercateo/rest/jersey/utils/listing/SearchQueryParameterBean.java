@@ -1,17 +1,21 @@
 package com.mercateo.rest.jersey.utils.listing;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
 
-import com.google.common.annotations.VisibleForTesting;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
 public class SearchQueryParameterBean {
-	static final int DEFAULT_OFFSET = 0;
-
-	@VisibleForTesting
-	static final int DEFAULT_LIMIT = 20;
+	@Getter
+	@Setter
+	private int defaultLimit = 20;
 
 	@QueryParam("offset")
-	private Integer offset;
+	@DefaultValue("0")
+	private Integer offset = 0;
 
 	@QueryParam("limit")
 	private Integer limit;
@@ -22,14 +26,7 @@ public class SearchQueryParameterBean {
 		this.limit = Integer.valueOf(limit);
 	}
 
-	public SearchQueryParameterBean() {
-		super();
-	}
-
 	public int getOffset() {
-		if (offset == null) {
-			return DEFAULT_OFFSET;
-		}
 		return offset.intValue();
 	}
 
@@ -39,16 +36,13 @@ public class SearchQueryParameterBean {
 
 	public int getLimit() {
 		if (limit == null) {
-			return DEFAULT_LIMIT;
+			return defaultLimit;
 		}
 		return limit.intValue();
-	}
-
-	public boolean isLimitSet() {
-		return limit != null;
 	}
 
 	public void setLimit(int limit) {
 		this.limit = Integer.valueOf(limit);
 	}
+
 }
