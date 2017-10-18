@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>rest-jersey-utils</artifactId>
 	<groupId>com.mercateo.rest</groupId>
@@ -36,7 +37,7 @@
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.7.9</jackson.version>
+		<jackson.version>2.5.4</jackson.version>
 		<jmh.version>1.18</jmh.version>
 	</properties>
 	<developers>
@@ -156,6 +157,11 @@
 	</dependencyManagement>
 	<dependencies>
 		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
 			<artifactId>jersey-test-framework-provider-inmemory</artifactId>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
 			<scope>test</scope>
@@ -214,6 +220,11 @@
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mercateo</groupId>
+			<artifactId>common.rest.schemagen</artifactId>
+			<version>0.18.9</version>
 		</dependency>
 	</dependencies>
 	<profiles>
