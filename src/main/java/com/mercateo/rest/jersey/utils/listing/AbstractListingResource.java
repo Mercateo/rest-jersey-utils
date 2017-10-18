@@ -27,6 +27,8 @@ import com.mercateo.common.rest.schemagen.link.relation.Relation;
 import com.mercateo.common.rest.schemagen.types.ObjectWithSchema;
 import com.mercateo.common.rest.schemagen.types.PaginatedResponse;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 
 public abstract class AbstractListingResource<SummaryJsonType extends StringIdProvider, FullJsonType extends StringIdProvider, SearchQueryBean extends SearchQueryParameterBean, ImplementationType extends AbstractListingResource<SummaryJsonType, FullJsonType, SearchQueryBean, ImplementationType>>
@@ -43,7 +45,8 @@ public abstract class AbstractListingResource<SummaryJsonType extends StringIdPr
 	private Class<ImplementationType> implementationClass;
 
 	@Inject
-	protected LinkMetaFactory linkMetaFactory;
+	@Getter(AccessLevel.PROTECTED)
+	private LinkMetaFactory linkMetaFactory;
 
 	protected AbstractListingResource(Class<ImplementationType> implementationClass) {
 		this.implementationClass = implementationClass;
@@ -155,9 +158,4 @@ public abstract class AbstractListingResource<SummaryJsonType extends StringIdPr
 			LinkFactory<ImplementationType> factoryForImplementation) {
 		return new ArrayList<Optional<Link>>();
 	}
-
-	protected LinkMetaFactory getLinkMetaFactory() {
-		return linkMetaFactory;
-	}
-
 }
