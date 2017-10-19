@@ -1,6 +1,7 @@
 package com.mercateo.rest.jersey.utils.listing;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
@@ -113,5 +114,8 @@ public class AbstractListingResourceTest extends JerseyTest {
 		assertEquals("test/1/summary",
 				testJson.get("members").get(0).get("_schema").get("links").get(0).get("href").asText());
 		assertEquals("test/1", testJson.get("members").get(0).get("_schema").get("links").get(1).get("href").asText());
+		JsonNode instanceLinkLdo = testJson.get("_schema").get("links").get(0);
+		assertEquals("instance", instanceLinkLdo.get("rel").asText());
+		assertTrue(instanceLinkLdo.get("href").asText().contains("{id}"));
 	}
 }
