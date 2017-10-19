@@ -29,6 +29,7 @@ import com.mercateo.common.rest.schemagen.types.PaginatedResponse;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Value;
 
 public abstract class AbstractListingResource<SummaryJsonType extends StringIdProvider, FullJsonType extends StringIdProvider, SearchQueryBean extends SearchQueryParameterBean, ImplementationType extends AbstractListingResource<SummaryJsonType, FullJsonType, SearchQueryBean, ImplementationType>>
@@ -48,7 +49,7 @@ public abstract class AbstractListingResource<SummaryJsonType extends StringIdPr
 	@Getter(AccessLevel.PROTECTED)
 	private LinkMetaFactory linkMetaFactory;
 
-	protected AbstractListingResource(Class<ImplementationType> implementationClass) {
+	protected AbstractListingResource(@NonNull Class<ImplementationType> implementationClass) {
 		this.implementationClass = implementationClass;
 	}
 
