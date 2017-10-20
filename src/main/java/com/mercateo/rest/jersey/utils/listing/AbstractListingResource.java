@@ -32,7 +32,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Value;
 
-public abstract class AbstractListingResource<SummaryJsonType extends StringIdProvider, FullJsonType extends StringIdProvider, SearchQueryBean extends SearchQueryParameterBean, ImplementationType extends AbstractListingResource<SummaryJsonType, FullJsonType, SearchQueryBean, ImplementationType>>
+public abstract class AbstractListingResource<IdType, SummaryJsonType extends IdProvider<IdType>, FullJsonType extends IdProvider<IdType>, SearchQueryBean extends SearchQueryParameterBean, ImplementationType extends AbstractListingResource<IdType, SummaryJsonType, FullJsonType, SearchQueryBean, ImplementationType>>
 		implements JerseyResource {
 
 	private static final Relation REL_INSTANCE = Relation.of("instance", RelType.OTHER);
@@ -55,9 +55,9 @@ public abstract class AbstractListingResource<SummaryJsonType extends StringIdPr
 
 	protected abstract ListingResult<SummaryJsonType> getSummaryListing(SearchQueryBean searchQueryBean);
 
-	protected abstract SummaryJsonType getSummaryForId(String id);
+	protected abstract SummaryJsonType getSummaryForId(IdType id);
 
-	protected abstract FullJsonType getForId(String id);
+	protected abstract FullJsonType getForId(IdType id);
 
 	@SuppressWarnings("boxing")
 	@GET
@@ -98,8 +98,9 @@ public abstract class AbstractListingResource<SummaryJsonType extends StringIdPr
 	@GET
 	@Path("{id}/summary")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ObjectWithSchema<SummaryJsonType> getSummary(@NotNull @BeanParam @Valid IdParameterBean idParamBean) {
-		String id = idParamBean.getId();
+	public ObjectWithSchema<SummaryJsonType> getSummary(
+			@NotNull @BeanParam @Valid IdParameterBean<IdType> idParamBean) {
+		IdType id = idParamBean.getId();
 		final SummaryJsonType summaryJson = getSummaryForId(id);
 		return getResponse(summaryJson, getImplementationLinkFactory());
 	}
@@ -134,8 +135,8 @@ public abstract class AbstractListingResource<SummaryJsonType extends StringIdPr
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ObjectWithSchema<FullJsonType> get(@NotNull @Valid @BeanParam IdParameterBean idParameterBean) {
-		String id = idParameterBean.getId();
+	public ObjectWithSchema<FullJsonType> get(@NotNull @Valid @BeanParam IdParameterBean<IdType> idParameterBean) {
+		IdType id = idParameterBean.getId();
 		final FullJsonType json = getForId(id);
 		return getResponse(json);
 	}

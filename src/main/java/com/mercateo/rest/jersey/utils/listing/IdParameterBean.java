@@ -6,13 +6,13 @@ import javax.ws.rs.PathParam;
 import lombok.Data;
 
 @Data
-public class IdParameterBean implements StringIdProvider {
+public class IdParameterBean<IdType> implements IdProvider<IdType> {
 	@PathParam("id")
 	@NotNull
-	private String id;
+	private IdType id;
 
-	public static IdParameterBean of(String id) {
-		IdParameterBean result = new IdParameterBean();
+	public static <IdType> IdParameterBean<IdType> of(IdType id) {
+		IdParameterBean<IdType> result = new IdParameterBean<>();
 		result.id = id;
 		return result;
 	}

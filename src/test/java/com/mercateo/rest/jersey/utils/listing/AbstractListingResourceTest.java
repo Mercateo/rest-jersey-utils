@@ -25,31 +25,25 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.mercateo.common.rest.schemagen.link.LinkMetaFactory;
 import com.mercateo.common.rest.schemagen.link.injection.LinkFactoryResourceConfig;
 
+import lombok.Data;
+
 public class AbstractListingResourceTest extends JerseyTest {
 	@JsonInclude(Include.NON_NULL)
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public static class TestJson implements StringIdProvider {
-		public TestJson(@JsonProperty("id") String id) {
+	@Data
+	public static class TestJson implements IdProvider<Integer> {
+		public TestJson(@JsonProperty("id") Integer id) {
 			super();
 			this.id = id;
 		}
 
-		private String id;
-
-		@Override
-		public String getId() {
-			return id;
-		}
-
-		public void setId(String id) {
-			this.id = id;
-		}
+		private Integer id;
 
 	}
 
 	@Path("test")
 	public static class TestResource
-			extends AbstractListingResource<TestJson, TestJson, SearchQueryParameterBean, TestResource> {
+			extends AbstractListingResource<Integer, TestJson, TestJson, SearchQueryParameterBean, TestResource> {
 
 		public TestResource() {
 			super(TestResource.class);
@@ -57,18 +51,18 @@ public class AbstractListingResourceTest extends JerseyTest {
 
 		@Override
 		protected ListingResult<TestJson> getSummaryListing(SearchQueryParameterBean searchQueryParameterBean) {
-			return new ListingResult<>(Arrays.asList(new TestJson("1")), 1);
+			return new ListingResult<>(Arrays.asList(new TestJson(1)), 1);
 
 		}
 
 		@Override
-		protected TestJson getSummaryForId(String id) {
-			return new TestJson("2");
+		protected TestJson getSummaryForId(Integer id) {
+			return new TestJson(2);
 		}
 
 		@Override
-		protected TestJson getForId(String id) {
-			return new TestJson("3");
+		protected TestJson getForId(Integer id) {
+			return new TestJson(3);
 		}
 
 	}
@@ -98,13 +92,13 @@ public class AbstractListingResourceTest extends JerseyTest {
 	@Test
 	public void testSummary() {
 		TestJson testJson = target("test/2/summary").request().get(TestJson.class);
-		assertEquals("2", testJson.getId());
+		assertEquals(Integer.valueOf(2), testJson.getId());
 	}
 
 	@Test
 	public void testGet() {
 		TestJson testJson = target("test/3").request().get(TestJson.class);
-		assertEquals("3", testJson.getId());
+		assertEquals(Integer.valueOf(3), testJson.getId());
 	}
 
 	@Test
