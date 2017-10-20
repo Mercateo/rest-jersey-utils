@@ -26,24 +26,25 @@ import com.mercateo.common.rest.schemagen.link.LinkMetaFactory;
 import com.mercateo.common.rest.schemagen.link.injection.LinkFactoryResourceConfig;
 
 import lombok.Data;
+import lombok.NonNull;
 
 public class AbstractListingResourceTest extends JerseyTest {
 	@JsonInclude(Include.NON_NULL)
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Data
-	public static class TestJson implements IdProvider<Integer> {
-		public TestJson(@JsonProperty("id") Integer id) {
+	public static class TestJson implements StringIdProvider {
+		public TestJson(@JsonProperty("id") String id) {
 			super();
 			this.id = id;
 		}
 
-		private Integer id;
+		private String id;
 
 	}
 
 	@Path("test")
 	public static class TestResource
-			extends AbstractListingResource<Integer, TestJson, TestJson, SearchQueryParameterBean, TestResource> {
+			extends AbstractListingResource<TestJson, TestJson, SearchQueryParameterBean, TestResource> {
 
 		public TestResource() {
 			super(TestResource.class);
@@ -51,18 +52,18 @@ public class AbstractListingResourceTest extends JerseyTest {
 
 		@Override
 		protected ListingResult<TestJson> getSummaryListing(SearchQueryParameterBean searchQueryParameterBean) {
-			return new ListingResult<>(Arrays.asList(new TestJson(1)), 1);
+			return new ListingResult<>(Arrays.asList(new TestJson("1")), 1);
 
 		}
 
 		@Override
-		protected TestJson getSummaryForId(Integer id) {
-			return new TestJson(2);
+		protected TestJson getSummaryForId(@NonNull String id) {
+			return new TestJson("2");
 		}
 
 		@Override
-		protected TestJson getForId(Integer id) {
-			return new TestJson(3);
+		protected TestJson getForId(@NonNull String id) {
+			return new TestJson("3");
 		}
 
 	}
@@ -92,13 +93,13 @@ public class AbstractListingResourceTest extends JerseyTest {
 	@Test
 	public void testSummary() {
 		TestJson testJson = target("test/2/summary").request().get(TestJson.class);
-		assertEquals(Integer.valueOf(2), testJson.getId());
+		assertEquals("2", testJson.getId());
 	}
 
 	@Test
 	public void testGet() {
 		TestJson testJson = target("test/3").request().get(TestJson.class);
-		assertEquals(Integer.valueOf(3), testJson.getId());
+		assertEquals("3", testJson.getId());
 	}
 
 	@Test
