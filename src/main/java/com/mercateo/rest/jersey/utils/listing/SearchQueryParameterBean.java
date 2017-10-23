@@ -3,6 +3,8 @@ package com.mercateo.rest.jersey.utils.listing;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
 
+import com.mercateo.common.rest.schemagen.IgnoreInRestSchema;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +13,15 @@ import lombok.Setter;
 public class SearchQueryParameterBean {
 	@Getter
 	@Setter
+	@IgnoreInRestSchema
 	private int defaultLimit = 20;
+
+	@IgnoreInRestSchema
+	private int defaultOffset = 0;
 
 	@QueryParam("offset")
 	@DefaultValue("0")
-	private Integer offset = 0;
+	private Integer offset;
 
 	@QueryParam("limit")
 	private Integer limit;
@@ -27,6 +33,9 @@ public class SearchQueryParameterBean {
 	}
 
 	public int getOffset() {
+		if (offset == null) {
+			return defaultOffset;
+		}
 		return offset.intValue();
 	}
 
