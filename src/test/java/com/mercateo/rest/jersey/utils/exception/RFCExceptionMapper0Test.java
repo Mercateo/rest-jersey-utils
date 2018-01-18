@@ -1,11 +1,13 @@
 package com.mercateo.rest.jersey.utils.exception;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ServiceUnavailableException;
 import javax.ws.rs.core.Response;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import com.google.common.testing.NullPointerTester;
@@ -24,6 +26,12 @@ public class RFCExceptionMapper0Test {
 
 		nullPointerTester.testInstanceMethods(uut, NullPointerTester.Visibility.PROTECTED);
 		nullPointerTester.testStaticMethods(clazz, NullPointerTester.Visibility.PROTECTED);
+	}
+
+	@Test
+	public void testContentTypeHeader() throws Exception{
+		Response r = uut.toResponse(new BadRequestException());
+		Assertions.assertThat(r.getHeaderString("Content-Type")).isEqualTo("application/problem+json");
 	}
 
 	@Test
