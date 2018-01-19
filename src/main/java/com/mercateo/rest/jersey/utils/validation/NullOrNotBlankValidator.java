@@ -15,7 +15,6 @@ public class NullOrNotBlankValidator implements ConstraintValidator<NullOrNotBla
     }
 
     private boolean hasValidLength(String value){
-        boolean isAllWhitespace = value.matches("^\\s*$");
-        return !isAllWhitespace && (value.length() > 0);
+        return (value.trim().length() > 0);
     }
 }
