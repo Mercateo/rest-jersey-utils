@@ -1,9 +1,13 @@
 package com.mercateo.rest.jersey.utils.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
-import lombok.Value;
 
-@Value
+@Getter
+@AllArgsConstructor
+@EqualsAndHashCode
 public class SimpleExceptionJson {
 	@NonNull
 	String title;
