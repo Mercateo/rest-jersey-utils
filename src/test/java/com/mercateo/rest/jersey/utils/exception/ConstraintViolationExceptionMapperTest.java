@@ -13,18 +13,23 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.ws.rs.core.Response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ConstrainViolationExceptionMapperTest {
+public class ConstraintViolationExceptionMapperTest {
 
     private final static int MIN_VAL = 2;
     private final static int MAX_VAL = 10;
 
-    private ConstrainViolationExceptionMapper uut = new ConstrainViolationExceptionMapper();
+    private ConstraintViolationExceptionMapper uut = new ConstraintViolationExceptionMapper();
     private static Validator validator;
 
     @BeforeClass

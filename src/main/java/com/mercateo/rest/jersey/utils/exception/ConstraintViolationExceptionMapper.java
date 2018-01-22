@@ -2,20 +2,18 @@ package com.mercateo.rest.jersey.utils.exception;
 
 import lombok.extern.slf4j.Slf4j;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
 @Slf4j
 @Provider
-public class ConstrainViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException>{
+public class ConstraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException>{
 
     @Override
     public Response toResponse(ConstraintViolationException violationException) {
