@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>rest-jersey-utils</artifactId>
 	<groupId>com.mercateo.rest</groupId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.14-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>rest-jersey-utils</name>
 	<description>Some untility classes for Jersey</description>
