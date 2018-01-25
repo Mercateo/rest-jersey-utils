@@ -58,10 +58,6 @@ public class ValidationError {
             } else if (value instanceof Collection && ((Collection<?>) value).size() > sizeAnnotation.max()) {
                 error = new ValidationError(ValidationErrorCode.MAXITEMS.name(), path, sizeAnnotation.max());
             }
-        } else if (annotation instanceof EnumValue) {
-            error = new ValidationError(ValidationErrorCode.ENUM.name(), path);
-        } else if (annotation instanceof NullOrNotBlank) {
-            error = new ValidationError(ValidationErrorCode.INVALID.name(), path);
         } else if (annotation instanceof Min) {
             final Min min = (Min) annotation;
             error = new ValidationError(ValidationErrorCode.MINLENGTH.name(), path, ((int) min.value()));

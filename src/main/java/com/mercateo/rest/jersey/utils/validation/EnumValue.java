@@ -14,7 +14,7 @@ public @interface EnumValue {
 
     Class<?>[] groups() default {};
 
-    String message() default "INVALID_VALUE";
+    String message() default "ENUM";
 
     Class<? extends Payload>[] payload() default {};
 

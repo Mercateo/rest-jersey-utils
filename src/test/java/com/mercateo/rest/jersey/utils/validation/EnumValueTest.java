@@ -27,7 +27,7 @@ public class EnumValueTest {
         val violations = validator.validate(classToBeValidated);
 
         assertThat(violations.size()).isGreaterThan(0);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("INVALID_VALUE");
+        assertThat(violations.iterator().next().getMessage()).isEqualTo("ENUM");
     }
 
 
