@@ -7,6 +7,7 @@ import java.util.List;
 @Getter
 public class ValidationExceptionJson extends SimpleExceptionJson {
 
+    final String type = "https://unite.eu/developers/errors/invalid";
     List<ValidationError> errors;
 
     public ValidationExceptionJson(String title, int status, String detail,List<ValidationError> errors) {
