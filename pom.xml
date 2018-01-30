@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>rest-jersey-utils</artifactId>
 	<groupId>com.mercateo.rest</groupId>
-	<version>0.0.19</version>
+	<version>0.0.20-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>rest-jersey-utils</name>
 	<description>Some untility classes for Jersey</description>
@@ -32,7 +32,7 @@
 		<connection>scm:git:git@github.com:Mercateo/rest-jersey-utils.git</connection>
 		<developerConnection>scm:git:git@github.com:Mercateo/rest-jersey-utils.git</developerConnection>
 		<url>https://github.com/Mercateo/rest-jersey-utils.git</url>
-		<tag>0.0.19</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
