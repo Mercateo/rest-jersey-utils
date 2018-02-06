@@ -19,10 +19,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
     public Response toResponse(ConstraintViolationException violationException) {
         List<ValidationError> errors = toValidationErrors(violationException);
 
-        log.error("Sending error response to client {}", errors
-                .stream()
-                .map(ValidationError::toString)
-                .collect(Collectors.joining(",")));
+        log.error("Sending error response to client {}", errors);
 
         return Response
                 .status(BAD_REQUEST)
