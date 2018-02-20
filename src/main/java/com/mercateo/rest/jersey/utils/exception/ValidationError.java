@@ -13,12 +13,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.ToString;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mercateo.rest.jersey.utils.validation.EnumValue;
-import com.mercateo.rest.jersey.utils.validation.NullOrNotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,7 +41,7 @@ public class ValidationError {
         String path = constructJsonPath(constraintViolation.getPropertyPath());
         ValidationError error = null;
 
-        if (annotation instanceof NotNull || annotation instanceof NotBlank || annotation instanceof AssertTrue) {
+        if (annotation instanceof NotNull || annotation.annotationType().getSimpleName().equals("NotBlank") || annotation instanceof AssertTrue) {
             return new ValidationError(ValidationErrorCode.REQUIRED.name(), path);
         } else if (annotation instanceof Size) {
             final Size sizeAnnotation = (Size) annotation;
@@ -66,7 +62,7 @@ public class ValidationError {
         } else if (annotation instanceof Max) {
             Max max = (Max) annotation;
             error = new ValidationError(ValidationErrorCode.MAXLENGTH.name(), path, ((int) max.value()));
-        } else if (annotation instanceof Email) {
+        } else if (annotation.annotationType().getSimpleName().equals("Email")) {
             error = new ValidationError(ValidationErrorCode.INVALID_EMAIL.name(), path);
         } else {
             String code = constraintViolation.getMessage() != null && !constraintViolation.getMessage().isEmpty()
