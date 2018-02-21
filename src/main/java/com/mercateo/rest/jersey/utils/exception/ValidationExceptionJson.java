@@ -9,11 +9,17 @@ import java.util.List;
 @JsonPropertyOrder({ "type", "status","title","detail", "errors" })
 public class ValidationExceptionJson extends SimpleExceptionJson {
 
-    final String type = "https://unite.eu/developers/errors/invalid";
-    List<ValidationError> errors;
+    final String type;
+    final List<ValidationError> errors;
 
-    public ValidationExceptionJson(String title, int status, String detail,List<ValidationError> errors) {
+    public ValidationExceptionJson(final String type,
+                                   final String title,
+                                   final int status,
+                                   final String detail,
+                                   final List<ValidationError> errors) {
+
         super(title, status, detail);
+        this.type = type;
         this.errors = errors;
     }
 }

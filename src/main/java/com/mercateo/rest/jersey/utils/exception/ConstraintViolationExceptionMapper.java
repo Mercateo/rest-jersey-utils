@@ -21,12 +21,16 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
 
         log.error("Sending error response to client {}", errors);
 
+        ValidationExceptionJson entity = new ValidationExceptionJson(
+                "https://unite.eu/developers/errors/invalid",
+                "Invalid",
+                BAD_REQUEST.getStatusCode(),
+                "The request body is syntactically correct, but is not accepted, because of its data.",
+                errors);
+
         return Response
                 .status(BAD_REQUEST)
-                .entity(new ValidationExceptionJson("Invalid",
-                        BAD_REQUEST.getStatusCode(),
-                        "The request body is syntactically correct, but is not accepted, because of its data.",
-                        errors))
+                .entity(entity)
                 .type("application/problem+json")
                 .build();
     }
