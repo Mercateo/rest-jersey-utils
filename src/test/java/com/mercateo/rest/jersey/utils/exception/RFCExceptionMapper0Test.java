@@ -1,7 +1,6 @@
 package com.mercateo.rest.jersey.utils.exception;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.ServiceUnavailableException;
@@ -53,6 +52,15 @@ public class RFCExceptionMapper0Test {
 	public void testToResponseNull() throws Exception {
 		Response r = uut.toResponse(new NullPointerException());
 		assertEquals(500, r.getStatus());
+		assertEquals(new SimpleExceptionJson("Internal Server Error", 500, null), r.getEntity());
+	}
+
+	@Test
+	public void testToResponseNoExceptionMessageIfNotWebAppException() throws Exception {
+		// an exception with some sensitive data :D
+		Response r = uut.toResponse(new IllegalArgumentException("Password x3$5oz#DD8 too short!"));
+		assertEquals(500, r.getStatus());
+		// detail should not contain exception message, but be null
 		assertEquals(new SimpleExceptionJson("Internal Server Error", 500, null), r.getEntity());
 	}
 

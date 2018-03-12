@@ -20,17 +20,22 @@ public class RFCExceptionMapper implements ExceptionMapper<Exception> {
 	public Response toResponse(@NonNull Exception exception) {
 		ResponseBuilder builder;
 		StatusType statusInfo;
+
+		final String exceptionMessage;
+
 		if (exception instanceof WebApplicationException) {
 			Response response = ((WebApplicationException) exception).getResponse();
 			builder = Response.fromResponse(response);
 			statusInfo = response.getStatusInfo();
+			exceptionMessage = exception.getMessage();
 		} else {
 			builder = Response.serverError();
 			statusInfo = Status.INTERNAL_SERVER_ERROR;
+			exceptionMessage = null;
 		}
 
 		SimpleExceptionJson simpleExceptionJson = new SimpleExceptionJson(statusInfo.getReasonPhrase(),
-				statusInfo.getStatusCode(), exception.getMessage());
+				statusInfo.getStatusCode(), exceptionMessage);
 		builder.entity(simpleExceptionJson);
 		builder.type("application/problem+json");
 
