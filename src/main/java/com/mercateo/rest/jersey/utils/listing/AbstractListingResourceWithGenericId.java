@@ -34,7 +34,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Value;
 
-public abstract class AbstractListingResourceWithGenericId<SummaryJsonType extends StringIdProvider, FullJsonType extends StringIdProvider, SearchQueryBean extends SearchQueryParameterBean, ImplementationType extends AbstractListingResourceWithGenericId<SummaryJsonType, FullJsonType, SearchQueryBean, ImplementationType, IdType>, IdType>
+public abstract class AbstractListingResourceWithGenericId<SummaryJsonType extends IdProvider<IdType>, FullJsonType extends IdProvider<IdType>, SearchQueryBean extends SearchQueryParameterBean, ImplementationType extends AbstractListingResourceWithGenericId<SummaryJsonType, FullJsonType, SearchQueryBean, ImplementationType, IdType>, IdType>
 		implements JerseyResource {
 
 	private static final Relation REL_INSTANCE = Relation.of("instance", RelType.OTHER);
@@ -76,7 +76,7 @@ public abstract class AbstractListingResourceWithGenericId<SummaryJsonType exten
 				.map(r -> getResponse(r, lf)).collect(Collectors.toList());
 
 		List<Link> links = Lists.newArrayList();
-		lf.forCall(REL_INSTANCE, r -> r.get(IdParameterBean.of(null))).ifPresent(links::add);
+		lf.forCall(REL_INSTANCE, r -> r.get(IdParameterBean.forTemplating())).ifPresent(links::add);
 		int offset = searchQueryBean.getOffset();
 		int limit = searchQueryBean.getLimit();
 		PaginationLinkBuilder paginationLinkBuilder = PaginationLinkBuilder.of(summaries.getTotalNumberOfHits(),
@@ -165,7 +165,7 @@ public abstract class AbstractListingResourceWithGenericId<SummaryJsonType exten
 		return new ArrayList<Optional<Link>>();
 	}
 
-	private IdType tryToConvertId(String id) {
+	protected IdType tryToConvertId(String id) {
 		try {
 			return idConverter.apply(id);
 		} catch (Exception ex) {

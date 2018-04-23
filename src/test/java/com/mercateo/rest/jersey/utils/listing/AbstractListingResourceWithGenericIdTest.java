@@ -35,13 +35,13 @@ public class AbstractListingResourceWithGenericIdTest extends JerseyTest {
     @JsonInclude(Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     @Data
-    public static class TestJson implements StringIdProvider {
+    public static class TestJson implements IdProvider<UUID> {
         public TestJson(@JsonProperty("id") UUID id) {
             super();
-            this.id = id.toString();
+            this.id = id;
         }
 
-        private String id;
+        private UUID id;
 
     }
 
@@ -105,26 +105,26 @@ public class AbstractListingResourceWithGenericIdTest extends JerseyTest {
     public void testSummary() {
         TestJson testJson = target("test/ba9d4569-ebb9-4722-b3f9-ddd3716ea1f2/summary").request()
                 .get(TestJson.class);
-        assertEquals(UUID_2.toString(), testJson.getId());
+        assertEquals(UUID_2, testJson.getId());
     }
 
     @Test
     public void testGet() {
         TestJson testJson = target("test/b7dfdbe0-7c9a-4613-bb2e-ff21c996cc18").request().get(
                 TestJson.class);
-        assertEquals(UUID_3.toString(), testJson.getId());
+        assertEquals(UUID_3, testJson.getId());
     }
 
     @Test(expected = BadRequestException.class)
     public void testSummary_invalidId() {
         TestJson testJson = target("test/notValidId/summary").request().get(TestJson.class);
-        assertEquals(UUID_2.toString(), testJson.getId());
+        assertEquals(UUID_2, testJson.getId());
     }
 
     @Test(expected = BadRequestException.class)
     public void testGet_invalidId() {
         TestJson testJson = target("test/notValidId").request().get(TestJson.class);
-        assertEquals(UUID_3.toString(), testJson.getId());
+        assertEquals(UUID_3, testJson.getId());
     }
 
     @Test
