@@ -45,6 +45,13 @@ public class CORSFeature implements Feature {
 			context.register(simpleAccessControlAllowHeaderFilter);
 			modified = true;
 		}
+
+		OptionsRequestFilter optionsRequestFilter = new OptionsRequestFilter();
+		if (!context.getConfiguration().isRegistered(optionsRequestFilter)) {
+			context.register(optionsRequestFilter);
+			modified = true;
+		}
+
 		return modified;
 	}
 
