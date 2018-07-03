@@ -55,6 +55,13 @@ public class RFCExceptionMapper0Test {
 		assertEquals(new SimpleExceptionJson("Internal Server Error", 500, null), r.getEntity());
 	}
 
+    @Test
+    public void testToResponseWithThrowable() throws Exception {
+        Response r = uut.toResponse(new OutOfMemoryError());
+        assertEquals(500, r.getStatus());
+        assertEquals(new SimpleExceptionJson("Internal Server Error", 500, null), r.getEntity());
+    }
+
 	@Test
 	public void testToResponseNoExceptionMessageIfNotWebAppException() throws Exception {
 		// an exception with some sensitive data :D
