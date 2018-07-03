@@ -29,10 +29,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Provider
-public class RFCExceptionMapper implements ExceptionMapper<Exception> {
+public class RFCExceptionMapper implements ExceptionMapper<Throwable> {
 
 	@Override
-	public Response toResponse(@NonNull Exception exception) {
+	public Response toResponse(@NonNull Throwable exception) {
 		ResponseBuilder builder;
 		StatusType statusInfo;
 
