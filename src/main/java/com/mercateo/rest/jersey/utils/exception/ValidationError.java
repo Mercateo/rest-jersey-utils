@@ -66,6 +66,7 @@ public class ValidationError {
         this.pattern = pattern;
     }
 
+    @SuppressWarnings("boxing")
     public static ValidationError of(ConstraintViolation<?> constraintViolation) {
         Annotation annotation = constraintViolation.getConstraintDescriptor().getAnnotation();
         String path = constructJsonPath(constraintViolation.getPropertyPath());
