@@ -39,7 +39,7 @@ public class DuplicateExceptionMapper implements ExceptionMapper<DuplicateValida
         log.error("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
-                "https://unite.eu/developers/errors/invalid",
+                "https://portal.unite.eu/de_DE/developers/errors/invalid",
                 "Invalid",
                 BAD_REQUEST.getStatusCode(),
                 "The request body is syntactically correct, but is not accepted, because of its data.",
