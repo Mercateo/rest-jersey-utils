@@ -23,7 +23,7 @@ import lombok.NonNull;
 
 @Getter
 @AllArgsConstructor
-public class DuplicateValidationException extends ValidationException {
+public class DuplicateException extends ValidationException {
 
     @NonNull
     String path;

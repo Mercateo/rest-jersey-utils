@@ -28,18 +28,18 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Provider
-public class DuplicateExceptionMapper implements ExceptionMapper<DuplicateValidationException> {
+public class DuplicateExceptionMapper implements ExceptionMapper<DuplicateException> {
 
     @Override
-    public Response toResponse(DuplicateValidationException duplicateValidationException) {
+    public Response toResponse(DuplicateException duplicateException) {
         List<ValidationError> errors = Arrays.asList(new ValidationError(
                 ValidationErrorCode.DUPLICATE.name(),
-                duplicateValidationException.getPath()));
+                duplicateException.getPath()));
 
-        log.error("Sending error response to client {}", errors);
+        log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
-                "https://portal.unite.eu/de_DE/developers/errors/invalid",
+                "http://developers.unite.eu/errors/invalid",
                 "Invalid",
                 BAD_REQUEST.getStatusCode(),
                 "The request body is syntactically correct, but is not accepted, because of its data.",
