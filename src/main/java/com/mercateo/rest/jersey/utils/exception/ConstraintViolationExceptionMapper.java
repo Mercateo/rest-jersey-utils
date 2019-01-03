@@ -34,7 +34,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
     public Response toResponse(ConstraintViolationException violationException) {
         List<ValidationError> errors = toValidationErrors(violationException);
 
-        log.error("Sending error response to client {}", errors);
+        log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
                 "http://developers.unite.eu/errors/invalid",
