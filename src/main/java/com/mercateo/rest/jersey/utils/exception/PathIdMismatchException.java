@@ -15,22 +15,8 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-public enum ValidationErrorCode {
+import javax.validation.ValidationException;
 
-    REQUIRED,
-    PATTERN,
-    TYPE,
-    MINLENGTH,
-    MAXLENGTH,
-    MINIMUM,
-    MAXIMUM,
-    INVALID,
-    MINITEMS,
-    MAXITEMS,
-    ENUM,
-    INVALID_EMAIL,
-    UNKNOWN,
-    DUPLICATE,
-    PATH_ID_MISMATCH
+public class PathIdMismatchException extends ValidationException {
 
 }
