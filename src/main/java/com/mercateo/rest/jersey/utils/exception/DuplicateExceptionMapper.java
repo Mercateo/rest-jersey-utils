@@ -15,26 +15,28 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import lombok.extern.slf4j.Slf4j;
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
-import javax.validation.ConstraintViolationException;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Provider
-public class ConstraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException>{
+public class DuplicateExceptionMapper implements ExceptionMapper<DuplicateException> {
 
     @Override
-    public Response toResponse(ConstraintViolationException violationException) {
-        List<ValidationError> errors = toValidationErrors(violationException);
+    public Response toResponse(DuplicateException duplicateException) {
+        List<ValidationError> errors = Arrays.asList(new ValidationError(
+                ValidationErrorCode.DUPLICATE.name(),
+                duplicateException.getPath()));
 
-        log.error("Sending error response to client {}", errors);
+        log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
                 "http://developers.unite.eu/errors/invalid",
@@ -48,15 +50,6 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
                 .entity(entity)
                 .type("application/problem+json")
                 .build();
-    }
-
-    private List<ValidationError> toValidationErrors(ConstraintViolationException violationException){
-        return  violationException
-                .getConstraintViolations()
-                .stream() //
-                .map(ValidationError::of)
-                .collect(Collectors.toList());
-
     }
 
 }

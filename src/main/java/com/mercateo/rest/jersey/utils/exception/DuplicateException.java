@@ -15,21 +15,17 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-public enum ValidationErrorCode {
+import javax.validation.ValidationException;
 
-    REQUIRED,
-    PATTERN,
-    TYPE,
-    MINLENGTH,
-    MAXLENGTH,
-    MINIMUM,
-    MAXIMUM,
-    INVALID,
-    MINITEMS,
-    MAXITEMS,
-    ENUM,
-    INVALID_EMAIL,
-    UNKNOWN,
-    DUPLICATE
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
 
+@Getter
+@AllArgsConstructor
+public class DuplicateException extends ValidationException {
+
+    @NonNull
+    String path;
+        
 }
