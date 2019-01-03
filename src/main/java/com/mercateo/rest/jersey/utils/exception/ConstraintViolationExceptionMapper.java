@@ -34,10 +34,10 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
     public Response toResponse(ConstraintViolationException violationException) {
         List<ValidationError> errors = toValidationErrors(violationException);
 
-        log.error("Sending error response to client {}", errors);
+        log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
-                "https://unite.eu/developers/errors/invalid",
+                "http://developers.unite.eu/errors/invalid",
                 "Invalid",
                 BAD_REQUEST.getStatusCode(),
                 "The request body is syntactically correct, but is not accepted, because of its data.",
