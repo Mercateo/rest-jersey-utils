@@ -38,7 +38,7 @@ public class PathIdMismatchExceptionMapper implements ExceptionMapper<PathIdMism
         log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
-                "http://developers.unite.eu/errors/invalid",
+                "https://developers.unite.eu/errors/invalid",
                 "Invalid",
                 BAD_REQUEST.getStatusCode(),
                 "The request body is syntactically correct, but is not accepted, because of its data.",
