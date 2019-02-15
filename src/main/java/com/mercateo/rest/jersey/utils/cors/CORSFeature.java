@@ -27,10 +27,17 @@ public class CORSFeature implements Feature {
 
 	private final List<String> allowedHeaders;
 	private final OriginFilter originFilter;
+	private final long numberOfCachedSeconds;
 
-	public CORSFeature(@NonNull List<String> allowedHeaders, @NonNull OriginFilter originFilter) {
+	public CORSFeature(@NonNull List<String> allowedHeaders, @NonNull OriginFilter originFilter,
+			long numberOfCachedSeconds) {
 		this.originFilter = originFilter;
 		this.allowedHeaders = allowedHeaders;
+		this.numberOfCachedSeconds = numberOfCachedSeconds;
+	}
+
+	public CORSFeature(@NonNull List<String> allowedHeaders, @NonNull OriginFilter originFilter) {
+		this(allowedHeaders, originFilter, 0L);
 	}
 
 	public CORSFeature(@NonNull OriginFilter originFilter) {
@@ -42,22 +49,29 @@ public class CORSFeature implements Feature {
 		boolean modified = false;
 		AccessControlAllowOriginRequestFilter accessControlAllowOriginRequestFilter = new AccessControlAllowOriginRequestFilter(
 				originFilter);
-		if (!context.getConfiguration().isRegistered(accessControlAllowOriginRequestFilter)) {
+		if (!context.getConfiguration().isRegistered(AccessControlAllowOriginRequestFilter.class)) {
 			context.register(accessControlAllowOriginRequestFilter);
 			modified = true;
 		}
 
 		AccessControlAllowOriginResponseFilter accessControlAllowOriginResponseFilter = new AccessControlAllowOriginResponseFilter(
 				originFilter);
-		if (!context.getConfiguration().isRegistered(accessControlAllowOriginResponseFilter)) {
+		if (!context.getConfiguration().isRegistered(AccessControlAllowOriginResponseFilter.class)) {
 			context.register(accessControlAllowOriginResponseFilter);
 			modified = true;
 		}
 
 		SimpleAccessControlAllowHeaderFilter simpleAccessControlAllowHeaderFilter = new SimpleAccessControlAllowHeaderFilter(
 				allowedHeaders);
-		if (!context.getConfiguration().isRegistered(simpleAccessControlAllowHeaderFilter)) {
+		if (!context.getConfiguration().isRegistered(SimpleAccessControlAllowHeaderFilter.class)) {
 			context.register(simpleAccessControlAllowHeaderFilter);
+			modified = true;
+		}
+
+		AccessControlMaxAgeHeaderFilter accessControlMaxAgeHeaderFilter = new AccessControlMaxAgeHeaderFilter(
+				numberOfCachedSeconds);
+		if (!context.getConfiguration().isRegistered(AccessControlMaxAgeHeaderFilter.class)) {
+			context.register(accessControlMaxAgeHeaderFilter);
 			modified = true;
 		}
 		return modified;
