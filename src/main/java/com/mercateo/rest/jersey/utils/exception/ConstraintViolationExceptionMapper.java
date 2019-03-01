@@ -38,16 +38,16 @@ public class ConstraintViolationExceptionMapper implements
     @Override
     public Response toResponse(ConstraintViolationException violationException) {
         List<ValidationError> errors = toValidationErrors(violationException);
-        ConstraintViolationExceptionType constraintViolationExceptionType = getConstraintViolationExceptionType(
+        RFCExceptionDetailsProvider rfcExceptionDetailsProvider = getConstraintViolationExceptionType(
                 violationException);
 
         log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
-                constraintViolationExceptionType.getName(),
-                constraintViolationExceptionType.getTitle(),
-                constraintViolationExceptionType.getStatus(),
-                constraintViolationExceptionType.getDetail(),
+                rfcExceptionDetailsProvider.getType(),
+                rfcExceptionDetailsProvider.getTitle(),
+                rfcExceptionDetailsProvider.getStatus(),
+                rfcExceptionDetailsProvider.getDetail(),
                 errors);
 
         return Response
@@ -67,7 +67,7 @@ public class ConstraintViolationExceptionMapper implements
 
     }
 
-    private ConstraintViolationExceptionType getConstraintViolationExceptionType(
+    private RFCExceptionDetailsProvider getConstraintViolationExceptionType(
             ConstraintViolationException violationException) {
         for (ConstraintViolation<?> constraintViolation : violationException
                 .getConstraintViolations()) {

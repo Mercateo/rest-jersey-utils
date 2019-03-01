@@ -5,7 +5,7 @@ import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import lombok.Getter;
 
 @Getter
-public enum ConstraintViolationExceptionType {
+public enum ConstraintViolationExceptionType implements RFCExceptionDetailsProvider {
 
     INVALID("https://developers.unite.eu/errors/invalid",
             BAD_REQUEST.getStatusCode(),
@@ -17,7 +17,7 @@ public enum ConstraintViolationExceptionType {
             "Invalid Query Parameter",
             "The filter query is not valid.");
 
-    private final String name;
+    private final String type;
 
     private final int status;
 
@@ -25,8 +25,8 @@ public enum ConstraintViolationExceptionType {
 
     private final String detail;
 
-    ConstraintViolationExceptionType(String name, int status, String title, String detail) {
-        this.name = name;
+    ConstraintViolationExceptionType(String type, int status, String title, String detail) {
+        this.type = type;
         this.status = status;
         this.title = title;
         this.detail = detail;

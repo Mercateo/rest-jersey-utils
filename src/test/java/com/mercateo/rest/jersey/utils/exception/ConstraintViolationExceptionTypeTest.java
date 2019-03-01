@@ -10,7 +10,7 @@ public class ConstraintViolationExceptionTypeTest {
     @Test
     public void test_INVALID_QUERY_PARAMExceptionMembers() {
 
-        assertThat(ConstraintViolationExceptionType.INVALID_QUERY_PARAM.getName()).isEqualTo(
+        assertThat(ConstraintViolationExceptionType.INVALID_QUERY_PARAM.getType()).isEqualTo(
                 "https://developers.unite.eu/errors/invalid-query-param");
         assertThat(ConstraintViolationExceptionType.INVALID_QUERY_PARAM.getStatus()).isEqualTo(
                 BAD_REQUEST.getStatusCode());
@@ -23,7 +23,7 @@ public class ConstraintViolationExceptionTypeTest {
     @Test
     public void test_INVALIDExceptionMembers() {
 
-        assertThat(ConstraintViolationExceptionType.INVALID.getName()).isEqualTo(
+        assertThat(ConstraintViolationExceptionType.INVALID.getType()).isEqualTo(
                 "https://developers.unite.eu/errors/invalid");
         assertThat(ConstraintViolationExceptionType.INVALID.getStatus()).isEqualTo(BAD_REQUEST
                 .getStatusCode());
