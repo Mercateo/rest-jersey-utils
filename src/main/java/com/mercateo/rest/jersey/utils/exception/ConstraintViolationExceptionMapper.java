@@ -15,32 +15,39 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import lombok.extern.slf4j.Slf4j;
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
+import com.mercateo.rest.jersey.utils.listing.SearchQueryParameterBean;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Provider
-public class ConstraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException>{
+public class ConstraintViolationExceptionMapper implements
+        ExceptionMapper<ConstraintViolationException> {
 
     @Override
     public Response toResponse(ConstraintViolationException violationException) {
         List<ValidationError> errors = toValidationErrors(violationException);
+        RFCExceptionDetailsProvider rfcExceptionDetailsProvider = getConstraintViolationExceptionType(
+                violationException);
 
         log.debug("Sending error response to client {}", errors);
 
         ValidationExceptionJson entity = new ValidationExceptionJson(
-                "https://developers.unite.eu/errors/invalid",
-                "Invalid",
-                BAD_REQUEST.getStatusCode(),
-                "The request body is syntactically correct, but is not accepted, because of its data.",
+                rfcExceptionDetailsProvider.getType(),
+                rfcExceptionDetailsProvider.getTitle(),
+                rfcExceptionDetailsProvider.getStatus(),
+                rfcExceptionDetailsProvider.getDetail(),
                 errors);
 
         return Response
@@ -50,13 +57,26 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
                 .build();
     }
 
-    private List<ValidationError> toValidationErrors(ConstraintViolationException violationException){
-        return  violationException
+    private List<ValidationError> toValidationErrors(
+            ConstraintViolationException violationException) {
+        return violationException
                 .getConstraintViolations()
                 .stream() //
                 .map(ValidationError::of)
                 .collect(Collectors.toList());
 
+    }
+
+    private RFCExceptionDetailsProvider getConstraintViolationExceptionType(
+            ConstraintViolationException violationException) {
+        for (ConstraintViolation<?> constraintViolation : violationException
+                .getConstraintViolations()) {
+            if (constraintViolation.getLeafBean() instanceof SearchQueryParameterBean) {
+                return ConstraintViolationExceptionType.INVALID_QUERY_PARAM;
+            }
+        }
+
+        return ConstraintViolationExceptionType.INVALID;
     }
 
 }
