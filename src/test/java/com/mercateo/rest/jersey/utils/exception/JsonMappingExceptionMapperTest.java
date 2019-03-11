@@ -89,6 +89,39 @@ public class JsonMappingExceptionMapperTest {
     }
 
     @Test
+    public void test_Error_complexJsonPath() throws Exception {
+
+        // given
+        InvalidFormatException ex = createExceptionWithNestedFields();
+
+        // when
+        Response response = uut.toResponse(ex);
+
+        // then
+
+        JSONObject errorJson = new JSONObject(response.getEntity())
+                .getJSONArray("errors")
+                .getJSONObject(0);
+
+        assertThat(errorJson.get("path").toString()).isEqualTo(
+                "#/fieldLayer1/fieldLayer2/fieldLayer3");
+
+    }
+
+    private InvalidFormatException createExceptionWithNestedFields() {
+        InvalidFormatException ex = new InvalidFormatException(null, "msg", new Object(),
+                UUID.class);
+        Reference refLayer1 = new Reference(Object.class, "fieldLayer1");
+        Reference refLayer2 = new Reference(Object.class, "fieldLayer2");
+        Reference refLayer3 = new Reference(Object.class, "fieldLayer3");
+
+        ex.prependPath(refLayer3);
+        ex.prependPath(refLayer2);
+        ex.prependPath(refLayer1);
+        return ex;
+    }
+
+    @Test
     public void test_Error_Enum() throws Exception {
 
         // given
