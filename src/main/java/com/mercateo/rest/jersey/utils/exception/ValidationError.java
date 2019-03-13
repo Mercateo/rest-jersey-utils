@@ -123,7 +123,7 @@ public class ValidationError {
         StringBuilder jsonPath = new StringBuilder("#");
         path.forEach(pathComponent -> {
             if (pathComponent.getKind() == ElementKind.PROPERTY) {
-                jsonPath.append("/").append(pathComponent.getName());
+                jsonPath.append("/").append(pathComponent);
             }
         });
         return jsonPath.toString();
