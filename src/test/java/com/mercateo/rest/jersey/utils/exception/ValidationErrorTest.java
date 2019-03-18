@@ -2,9 +2,12 @@ package com.mercateo.rest.jersey.utils.exception;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -12,6 +15,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import lombok.AllArgsConstructor;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,6 +83,21 @@ public class ValidationErrorTest {
 
     }
 
+    @Test
+    public void test_violationInList_path() {
+
+        // given
+        ClassInvalidElementInList invalidListClass = new ClassInvalidElementInList();
+
+        // when
+        Set<ConstraintViolation<Object>> violations = validator.validate(invalidListClass);
+        ValidationError validationError = ValidationError.of(violations.iterator().next());
+
+        // then
+        assertThat(validationError.getPath()).isEqualTo("#/list[1]/wrapped");
+
+    }
+
     private static class ClassInvalidMaxLength {
 
         @Max(9)
@@ -95,6 +116,20 @@ public class ValidationErrorTest {
 
         @Pattern(regexp = "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?$")
         private final String iban = "DEX0111122223333444455";
+
+    }
+
+    private static class ClassInvalidElementInList {
+
+        @Valid
+        List<ValidationWrapper> list = Arrays.asList(new ValidationWrapper("valid"),
+                new ValidationWrapper(" "));
+
+        @AllArgsConstructor
+        private class ValidationWrapper {
+            @NotBlank
+            private String wrapped;
+        }
 
     }
 
