@@ -3,6 +3,7 @@ package com.mercateo.rest.jersey.utils.exception;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import java.time.LocalDateTime;
@@ -22,17 +23,17 @@ public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingEx
 
         if (exception instanceof InvalidFormatException) {
 
-            String fieldName = exception.getPath().iterator().next().getFieldName();
+            String path = constructJsonPath(exception.getPath());
             InvalidFormatException e = (InvalidFormatException) exception;
             Class<?> targetType = e.getTargetType();
 
             if (targetType != null && targetType == UUID.class) {
-                return createUuidResponse(fieldName);
+                return createUuidResponse(path);
             } else if (targetType != null && targetType.isEnum()) {
-                return createResponseForWrongEnumValue(fieldName);
+                return createResponseForWrongEnumValue(path);
             } else {
                 if (targetType != null && isWrongTypeMappableField(targetType)) {
-                    return createResponseForWrongType(fieldName);
+                    return createResponseForWrongType(path);
                 }
             }
         }
@@ -41,27 +42,27 @@ public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingEx
 
     }
 
-    private Response createUuidResponse(String field) {
+    private Response createUuidResponse(String path) {
 
         List<ValidationError> errors = Arrays.asList(new ValidationError(
-                ValidationErrorCode.PATTERN.name(), "#/" + field,
+                ValidationErrorCode.PATTERN.name(), path,
                 "^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$"));
 
         return createCustomResponse(errors);
     }
 
-    private Response createResponseForWrongEnumValue(String field) {
+    private Response createResponseForWrongEnumValue(String path) {
 
         List<ValidationError> errors = Arrays.asList(new ValidationError(
-                ValidationErrorCode.ENUM.name(), "#/" + field));
+                ValidationErrorCode.ENUM.name(), path));
 
         return createCustomResponse(errors);
     }
 
-    private Response createResponseForWrongType(String field) {
+    private Response createResponseForWrongType(String path) {
 
         List<ValidationError> errors = Arrays.asList(new ValidationError(
-                ValidationErrorCode.TYPE.name(), "#/" + field));
+                ValidationErrorCode.TYPE.name(), path));
 
         return createCustomResponse(errors);
     }
@@ -100,5 +101,13 @@ public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingEx
 
         return Response.status(Response.Status.BAD_REQUEST).entity(exception.getMessage()).type(
                 "text/plain").build();
+    }
+    
+    private static String constructJsonPath(List<Reference> path) {
+        StringBuilder jsonPath = new StringBuilder("#");
+        path.forEach(pathComponent -> {
+            jsonPath.append("/").append(pathComponent.getFieldName());
+        });
+        return jsonPath.toString();
     }
 }
