@@ -15,9 +15,10 @@
  */
 package com.mercateo.rest.jersey.utils.validation;
 
+import java.lang.annotation.*;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
 
 @Target( {ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)

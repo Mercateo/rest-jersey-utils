@@ -15,10 +15,10 @@
  */
 package com.mercateo.rest.jersey.utils.validation;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class NullOrNotBlankValidator implements ConstraintValidator<NullOrNotBlank, String> {

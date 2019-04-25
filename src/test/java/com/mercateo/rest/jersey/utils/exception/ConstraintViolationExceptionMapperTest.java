@@ -19,10 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Sets;
-import com.mercateo.rest.jersey.utils.listing.SearchQueryParameterBean;
-import com.mercateo.rest.jersey.utils.validation.EnumValue;
-
 import java.lang.annotation.Annotation;
 
 import javax.validation.ConstraintViolation;
@@ -38,9 +34,6 @@ import javax.validation.constraints.Size;
 import javax.validation.metadata.ConstraintDescriptor;
 import javax.ws.rs.core.Response;
 
-import lombok.RequiredArgsConstructor;
-import lombok.val;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.json.JSONObject;
@@ -48,6 +41,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.google.common.collect.Sets;
+import com.mercateo.rest.jersey.utils.listing.SearchQueryParameterBean;
+import com.mercateo.rest.jersey.utils.validation.EnumValue;
+
+import lombok.RequiredArgsConstructor;
+import lombok.val;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConstraintViolationExceptionMapperTest {

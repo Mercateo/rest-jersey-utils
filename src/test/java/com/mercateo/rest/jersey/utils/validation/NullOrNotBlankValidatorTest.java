@@ -15,9 +15,10 @@
  */
 package com.mercateo.rest.jersey.utils.validation;
 
-import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import lombok.val;
 
 public class NullOrNotBlankValidatorTest {
 
