@@ -15,10 +15,11 @@
  */
 package com.mercateo.rest.jersey.utils.listing;
 
+import com.mercateo.common.rest.schemagen.IgnoreInRestSchema;
+
+import javax.validation.constraints.Min;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
-
-import com.mercateo.common.rest.schemagen.IgnoreInRestSchema;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,47 +27,66 @@ import lombok.Setter;
 
 @NoArgsConstructor
 public class SearchQueryParameterBean {
-	@Getter
-	@Setter
-	@IgnoreInRestSchema
-	private int defaultLimit = 20;
 
-	@IgnoreInRestSchema
-	private int defaultOffset = 0;
+    @Getter
+    @Setter
+    @IgnoreInRestSchema
+    private int defaultLimit = 20;
 
-	@QueryParam("offset")
-	@DefaultValue("0")
-	private Integer offset;
+    @IgnoreInRestSchema
+    private int defaultOffset = 0;
 
-	@QueryParam("limit")
-	private Integer limit;
+    @QueryParam("offset")
+    @DefaultValue("0")
+    @Min(0)
+    private Integer offset;
 
-	public SearchQueryParameterBean(int offset, int limit) {
-		super();
-		this.offset = Integer.valueOf(offset);
-		this.limit = Integer.valueOf(limit);
-	}
+    @QueryParam("limit")
+    @Min(0)
+    private Integer limit;
 
-	public int getOffset() {
-		if (offset == null) {
-			return defaultOffset;
-		}
-		return offset.intValue();
-	}
+    public SearchQueryParameterBean(int offset, int limit) {
+        super();
+        checkOffset(offset);
+        this.offset = Integer.valueOf(offset);
+        checkLimit(limit);
+        this.limit = Integer.valueOf(limit);
+    }
 
-	public void setOffset(int offset) {
-		this.offset = Integer.valueOf(offset);
-	}
+    public int getOffset() {
+        if (offset == null) {
+            return defaultOffset;
+        }
+        return offset.intValue();
+    }
 
-	public int getLimit() {
-		if (limit == null) {
-			return defaultLimit;
-		}
-		return limit.intValue();
-	}
+    public void setOffset(int offset) {
+        checkOffset(offset);
+        this.offset = Integer.valueOf(offset);
+    }
 
-	public void setLimit(int limit) {
-		this.limit = Integer.valueOf(limit);
-	}
+    public int getLimit() {
+        if (limit == null) {
+            return defaultLimit;
+        }
+        return limit.intValue();
+    }
+
+    public void setLimit(int limit) {
+        checkLimit(limit);
+        this.limit = Integer.valueOf(limit);
+    }
+
+    private void checkLimit(int limit) {
+        if (limit < 0) {
+            throw new IllegalArgumentException("limit must be equal or greather than 0");
+        }
+    }
+
+    private void checkOffset(int offset) {
+        if (offset < 0) {
+            throw new IllegalArgumentException("offset must be equal or greather than 0");
+        }
+    }
 
 }
