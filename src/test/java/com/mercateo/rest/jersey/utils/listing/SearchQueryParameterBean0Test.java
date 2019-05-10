@@ -35,12 +35,14 @@ public class SearchQueryParameterBean0Test {
         assertEquals(0, searchQueryParameterBean2.getOffset());
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void test_exceptionWithNegativeOffset() {
         // no setting of default value needed
         SearchQueryParameterBean searchQueryParameterBean = new SearchQueryParameterBean(-1, 0);
     }
 
+    @SuppressWarnings("unused")
     @Test(expected = IllegalArgumentException.class)
     public void test_exceptionWithNegativeLimit() {
         // no setting of default value needed

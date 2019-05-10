@@ -15,6 +15,8 @@
  */
 package com.mercateo.rest.jersey.utils.listing;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.mercateo.common.rest.schemagen.IgnoreInRestSchema;
 
 import javax.validation.constraints.Min;
@@ -78,15 +80,11 @@ public class SearchQueryParameterBean {
     }
 
     private void checkLimit(int limit) {
-        if (limit < 0) {
-            throw new IllegalArgumentException("limit must be equal or greather than 0");
-        }
+        checkArgument(limit >= 0, "Limit was %s but expected nonnegative.", limit);
     }
 
     private void checkOffset(int offset) {
-        if (offset < 0) {
-            throw new IllegalArgumentException("offset must be equal or greather than 0");
-        }
+        checkArgument(offset >= 0, "Offset was %s but expected nonnegative.", offset);
     }
 
 }
