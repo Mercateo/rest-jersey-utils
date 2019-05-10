@@ -17,8 +17,6 @@ package com.mercateo.rest.jersey.utils.exception;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 
-import com.mercateo.rest.jersey.utils.listing.SearchQueryParameterBean;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +25,8 @@ import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+
+import com.mercateo.rest.jersey.utils.listing.SearchQueryParameterBean;
 
 import lombok.extern.slf4j.Slf4j;
 

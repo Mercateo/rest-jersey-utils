@@ -15,11 +15,12 @@
  */
 package com.mercateo.rest.jersey.utils.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 public class EnumValueValidator implements ConstraintValidator<EnumValue, CharSequence> {
 

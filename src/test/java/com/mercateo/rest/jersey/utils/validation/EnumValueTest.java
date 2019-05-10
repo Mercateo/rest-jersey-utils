@@ -15,16 +15,16 @@
  */
 package com.mercateo.rest.jersey.utils.validation;
 
-import lombok.val;
-import org.junit.Before;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import static org.assertj.core.api.Assertions.*;
+import org.junit.Before;
+import org.junit.Test;
 
+import lombok.val;
 
 public class EnumValueTest {
 

@@ -15,10 +15,11 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Getter;
-
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import lombok.Getter;
 
 @Getter
 @JsonPropertyOrder({ "type", "status","title","detail", "errors" })

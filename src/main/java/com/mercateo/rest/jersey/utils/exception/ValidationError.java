@@ -15,8 +15,6 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 
@@ -29,6 +27,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
