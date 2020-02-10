@@ -36,6 +36,8 @@ public class RFCExceptionMapper implements ExceptionMapper<Throwable> {
 		ResponseBuilder builder;
 		StatusType statusInfo;
 
+		final String accessDeniedExceptionClassName = "org.springframework.security.access.AccessDeniedException";
+
 		final String exceptionMessage;
 
 		if (exception instanceof WebApplicationException) {
@@ -43,6 +45,10 @@ public class RFCExceptionMapper implements ExceptionMapper<Throwable> {
 			builder = Response.fromResponse(response);
 			statusInfo = response.getStatusInfo();
 			exceptionMessage = exception.getMessage();
+		} else if (exception.getClass().getName().contentEquals(accessDeniedExceptionClassName)) {
+			statusInfo = Status.FORBIDDEN;
+			exceptionMessage = exception.getMessage();
+			builder = Response.status(statusInfo);
 		} else {
 			builder = Response.serverError();
 			statusInfo = Status.INTERNAL_SERVER_ERROR;
