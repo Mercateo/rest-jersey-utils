@@ -52,7 +52,7 @@ public class SimpleAccessControlAllowHeaderFilter implements ContainerResponseFi
 			ContainerResponseContext containerResponseContext) throws IOException {
 
 		MultivaluedMap<String, Object> headers = containerResponseContext.getHeaders();
-		headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "orgin");
+		headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "origin");
 		headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "content-type");
 		headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "accept");
 		headers.add(ACCESS_CONTROL_ALLOW_HEADERS, "authorization");

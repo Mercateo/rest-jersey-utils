@@ -48,7 +48,7 @@ public class SimpleAccessControlAllowHeaderFilterIntegrationTest extends JerseyT
 
 		MultivaluedMap<String, Object> headers = target("/").request().get().getHeaders();
 
-		assertEquals("orgin, content-type, accept, authorization", headers.get("Access-Control-Allow-Headers").get(0));
+		assertEquals("origin, content-type, accept, authorization", headers.get("Access-Control-Allow-Headers").get(0));
 		assertEquals("true", headers.get("Access-Control-Allow-Credentials").get(0));
 		assertEquals("GET, POST, PUT, DELETE, OPTIONS", headers.get("Access-Control-Allow-Methods").get(0));
 
