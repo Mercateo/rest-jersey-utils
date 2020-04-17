@@ -66,7 +66,7 @@ public class CorsFeatureIntegrationTest extends JerseyTest {
 
 		MultivaluedMap<String, Object> headers = resp.getHeaders();
 
-		assertEquals("orgin, content-type, accept, authorization", headers.get("Access-Control-Allow-Headers").get(0));
+		assertEquals("origin, content-type, accept, authorization", headers.get("Access-Control-Allow-Headers").get(0));
 		assertEquals("true", headers.get("Access-Control-Allow-Credentials").get(0));
 		assertEquals("GET, POST, PUT, DELETE, OPTIONS", headers.get("Access-Control-Allow-Methods").get(0));
 	}
@@ -89,7 +89,7 @@ public class CorsFeatureIntegrationTest extends JerseyTest {
 
 		MultivaluedMap<String, Object> headers = resp.getHeaders();
 
-		assertEquals("orgin, content-type, accept, authorization", headers.get("Access-Control-Allow-Headers").get(0));
+		assertEquals("origin, content-type, accept, authorization", headers.get("Access-Control-Allow-Headers").get(0));
 		assertEquals("true", headers.get("Access-Control-Allow-Credentials").get(0));
 		assertEquals("GET, POST, PUT, DELETE, OPTIONS", headers.get("Access-Control-Allow-Methods").get(0));
 	}
