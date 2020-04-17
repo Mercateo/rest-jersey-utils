@@ -9,7 +9,7 @@
 
 	<artifactId>rest-jersey-utils</artifactId>
 	<groupId>com.mercateo.rest</groupId>
-	<version>0.1.10-SNAPSHOT</version>
+	<version>0.1.11-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>rest-jersey-utils</name>
 	<description>Some untility classes for Jersey</description>
