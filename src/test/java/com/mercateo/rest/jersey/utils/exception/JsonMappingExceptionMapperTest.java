@@ -26,22 +26,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.ws.rs.core.Response;
-
 import org.assertj.core.api.Assertions;
 import org.json.JSONObject;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import com.tngtech.junit.dataprovider.DataProvider;
+import com.tngtech.junit.dataprovider.UseDataProvider;
+
+import jakarta.ws.rs.core.Response;
 
 @SuppressWarnings("boxing")
-@RunWith(DataProviderRunner.class)
+//@RunWith(DataProviderRunner.class)
 public class JsonMappingExceptionMapperTest {
 
     private JsonMappingExceptionMapper uut = new JsonMappingExceptionMapper();
@@ -213,7 +212,7 @@ public class JsonMappingExceptionMapperTest {
         };
     }
 
-    @Test
+    @ParameterizedTest
     @UseDataProvider("fieldsForMappingTest")
     public void test_mappableFields(Class<?> targetType, boolean customError) throws Throwable {
 

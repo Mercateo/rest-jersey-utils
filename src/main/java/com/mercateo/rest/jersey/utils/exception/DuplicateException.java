@@ -15,8 +15,7 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import javax.validation.ValidationException;
-
+import jakarta.validation.ValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;

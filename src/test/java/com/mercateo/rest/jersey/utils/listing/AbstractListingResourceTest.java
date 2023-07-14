@@ -16,7 +16,7 @@
 package com.mercateo.rest.jersey.utils.listing;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import lombok.NonNull;
 

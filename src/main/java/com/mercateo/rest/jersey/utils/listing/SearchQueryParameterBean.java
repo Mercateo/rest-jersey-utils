@@ -19,10 +19,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.mercateo.common.rest.schemagen.IgnoreInRestSchema;
 
-import javax.validation.constraints.Min;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.QueryParam;
-
+import jakarta.validation.constraints.Min;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

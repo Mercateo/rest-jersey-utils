@@ -15,21 +15,20 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.GET;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Application;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.InternalServerErrorException;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Application;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -74,7 +73,7 @@ public class RFCExceptionMapperIntegrationTest extends JerseyTest {
 			assertEquals("hello", se.getDetail());
 			return;
 		}
-		Assert.fail();
+		fail();
 	}
 
     @Test
@@ -88,7 +87,7 @@ public class RFCExceptionMapperIntegrationTest extends JerseyTest {
             assertNull(se.getDetail());
             return;
         }
-        Assert.fail();
+		fail();
     }
 
 }

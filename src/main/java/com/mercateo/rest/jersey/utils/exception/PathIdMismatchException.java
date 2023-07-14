@@ -15,7 +15,7 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 
 public class PathIdMismatchException extends ValidationException {
 

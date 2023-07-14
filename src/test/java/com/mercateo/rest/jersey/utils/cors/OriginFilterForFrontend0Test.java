@@ -15,19 +15,16 @@
  */
 package com.mercateo.rest.jersey.utils.cors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.params.ParameterizedTest;
 
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import com.tngtech.junit.dataprovider.DataProvider;
+import com.tngtech.junit.dataprovider.UseDataProvider;
 
-@RunWith(DataProviderRunner.class)
 @SuppressWarnings("boxing")
 public class OriginFilterForFrontend0Test {
 
@@ -89,7 +86,7 @@ public class OriginFilterForFrontend0Test {
 		};
 	}
 
-	@Test
+	@ParameterizedTest
 	@UseDataProvider("data")
 	public void testIsOriginAllowed(String domain, String origin, boolean expected) {
 

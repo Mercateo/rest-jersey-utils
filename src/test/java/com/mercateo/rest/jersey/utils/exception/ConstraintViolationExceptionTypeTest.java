@@ -15,11 +15,10 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
-
+import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ConstraintViolationExceptionTypeTest {
 

@@ -21,17 +21,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.BeanParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Link;
-import javax.ws.rs.core.MediaType;
-
 import com.google.common.collect.Lists;
 import com.mercateo.common.rest.schemagen.JerseyResource;
 import com.mercateo.common.rest.schemagen.JsonHyperSchema;
@@ -44,6 +33,16 @@ import com.mercateo.common.rest.schemagen.link.relation.Relation;
 import com.mercateo.common.rest.schemagen.types.ObjectWithSchema;
 import com.mercateo.common.rest.schemagen.types.PaginatedResponse;
 
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.BeanParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Link;
+import jakarta.ws.rs.core.MediaType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;

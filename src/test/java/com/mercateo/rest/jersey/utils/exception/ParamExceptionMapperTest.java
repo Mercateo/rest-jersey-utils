@@ -17,13 +17,13 @@ package com.mercateo.rest.jersey.utils.exception;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.ws.rs.core.Response;
-
 import org.glassfish.jersey.server.ParamException.PathParamException;
 import org.glassfish.jersey.server.ParamException.QueryParamException;
 import org.json.JSONObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+
+import jakarta.ws.rs.core.Response;
 
 public class ParamExceptionMapperTest {
 

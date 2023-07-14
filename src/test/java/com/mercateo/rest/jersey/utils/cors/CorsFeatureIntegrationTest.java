@@ -15,24 +15,23 @@
  */
 package com.mercateo.rest.jersey.utils.cors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URL;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+import java.util.List;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import jersey.repackaged.com.google.common.collect.Lists;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Application;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
 import lombok.SneakyThrows;
 
 public class CorsFeatureIntegrationTest extends JerseyTest {
@@ -52,7 +51,7 @@ public class CorsFeatureIntegrationTest extends JerseyTest {
 		ResourceConfig rs = new ResourceConfig(TestResource.class, JacksonFeature.class);
 
 		CORSFeature corsFeature = new CORSFeature(new OriginFilter.Default(
-				Lists.newArrayList(new URL("http://localhost:8080")), Lists.newArrayList("0.0.0.0")));
+				List.of(new URL("http://localhost:8080")), List.of("0.0.0.0")));
 		rs.register(corsFeature);
 		return rs;
 	}

@@ -15,19 +15,18 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
-
 import com.mercateo.rest.jersey.utils.listing.SearchQueryParameterBean;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

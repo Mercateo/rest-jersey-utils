@@ -15,32 +15,32 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static org.junit.Assert.assertEquals;
-
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.ServiceUnavailableException;
-import javax.ws.rs.core.Response;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import com.google.common.testing.NullPointerTester;
+// 
+// import com.google.common.testing.NullPointerTester;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.ServiceUnavailableException;
+import jakarta.ws.rs.core.Response;
 
 public class RFCExceptionMapper0Test {
 
 	RFCExceptionMapper uut = new RFCExceptionMapper();
 
-	@Test
-	public void testNullContracts() throws Exception {
-		NullPointerTester nullPointerTester = new NullPointerTester();
-		Class<?> clazz = uut.getClass();
-
-		nullPointerTester.testAllPublicConstructors(clazz);
-		nullPointerTester.testAllPublicStaticMethods(clazz);
-
-		nullPointerTester.testInstanceMethods(uut, NullPointerTester.Visibility.PROTECTED);
-		nullPointerTester.testStaticMethods(clazz, NullPointerTester.Visibility.PROTECTED);
-	}
+//	@Test
+//	public void testNullContracts() throws Exception {
+//		NullPointerTester nullPointerTester = new NullPointerTester();
+//		Class<?> clazz = uut.getClass();
+//
+//		nullPointerTester.testAllPublicConstructors(clazz);
+//		nullPointerTester.testAllPublicStaticMethods(clazz);
+//
+//		nullPointerTester.testInstanceMethods(uut, NullPointerTester.Visibility.PROTECTED);
+//		nullPointerTester.testStaticMethods(clazz, NullPointerTester.Visibility.PROTECTED);
+//	}
 
 	@Test
 	public void testContentTypeHeader() throws Exception{

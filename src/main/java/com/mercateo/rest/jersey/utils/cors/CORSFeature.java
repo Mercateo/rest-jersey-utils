@@ -18,9 +18,8 @@ package com.mercateo.rest.jersey.utils.cors;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
-
+import jakarta.ws.rs.core.Feature;
+import jakarta.ws.rs.core.FeatureContext;
 import lombok.NonNull;
 
 public class CORSFeature implements Feature {

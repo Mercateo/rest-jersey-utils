@@ -15,8 +15,7 @@
  */
 package com.mercateo.rest.jersey.utils.listing;
 
-import javax.ws.rs.PathParam;
-
+import jakarta.ws.rs.PathParam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

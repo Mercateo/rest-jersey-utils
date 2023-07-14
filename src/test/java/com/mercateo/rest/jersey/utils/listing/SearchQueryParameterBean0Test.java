@@ -15,9 +15,10 @@
  */
 package com.mercateo.rest.jersey.utils.listing;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SearchQueryParameterBean0Test {
     @Test
@@ -36,17 +37,17 @@ public class SearchQueryParameterBean0Test {
     }
 
     @SuppressWarnings("unused")
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_exceptionWithNegativeOffset() {
         // no setting of default value needed
-        SearchQueryParameterBean searchQueryParameterBean = new SearchQueryParameterBean(-1, 0);
+        assertThrows(IllegalArgumentException.class, () -> new SearchQueryParameterBean(-1, 0));
     }
 
     @SuppressWarnings("unused")
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void test_exceptionWithNegativeLimit() {
         // no setting of default value needed
-        SearchQueryParameterBean searchQueryParameterBean = new SearchQueryParameterBean(0, -1);
+        assertThrows(IllegalArgumentException.class, () -> new SearchQueryParameterBean(-1, 0));
     }
 
 }

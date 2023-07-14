@@ -17,11 +17,11 @@ package com.mercateo.rest.jersey.utils.exception;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.ws.rs.core.Response;
-
 import org.assertj.core.api.Assertions;
 import org.json.JSONObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import jakarta.ws.rs.core.Response;
 
 public class PathIdMismatchExceptionMapperTest {
 

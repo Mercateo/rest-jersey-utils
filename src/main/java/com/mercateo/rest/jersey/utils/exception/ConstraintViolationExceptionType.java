@@ -15,7 +15,7 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 
 import lombok.Getter;
 

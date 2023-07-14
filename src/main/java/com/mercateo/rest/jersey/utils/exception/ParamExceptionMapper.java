@@ -15,16 +15,16 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 
 import java.util.Arrays;
 import java.util.List;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-
 import org.glassfish.jersey.server.ParamException;
 import org.glassfish.jersey.server.ParamException.QueryParamException;
+
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
 
 public class ParamExceptionMapper implements ExceptionMapper<ParamException> {
 

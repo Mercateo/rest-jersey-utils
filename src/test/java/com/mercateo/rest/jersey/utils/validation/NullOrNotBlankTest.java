@@ -17,13 +17,12 @@ package com.mercateo.rest.jersey.utils.validation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Before;
-import org.junit.Test;
-
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import lombok.AllArgsConstructor;
 import lombok.val;
 
@@ -31,7 +30,7 @@ public class NullOrNotBlankTest {
 
     private Validator validator;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
