@@ -15,11 +15,12 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import com.google.common.testing.NullPointerTester;
-import org.junit.jupiter.api.Test;
 
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.ServiceUnavailableException;
