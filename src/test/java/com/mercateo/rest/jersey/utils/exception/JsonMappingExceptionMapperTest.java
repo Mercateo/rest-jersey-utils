@@ -40,7 +40,6 @@ import com.tngtech.junit.dataprovider.UseDataProvider;
 import jakarta.ws.rs.core.Response;
 
 @SuppressWarnings("boxing")
-//@RunWith(DataProviderRunner.class)
 public class JsonMappingExceptionMapperTest {
 
     private JsonMappingExceptionMapper uut = new JsonMappingExceptionMapper();

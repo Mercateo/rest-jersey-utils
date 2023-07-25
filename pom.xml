@@ -48,19 +48,6 @@
 		<jersey.version>3.1.2</jersey.version>
 		<glassfish.version>3.0.4</glassfish.version>
 	</properties>
-	<developers>
-		<developer>
-			<id>joerg_adler</id>
-			<name>Joerg Adler</name>
-			<email>joerg.adler@mercateo.com</email>
-			<url>http://www.mercateo.com</url>
-			<organization>Mercateo AG</organization>
-			<organizationUrl>http://www.mercateo.com</organizationUrl>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
 	<build>
 		<plugins>
 			<plugin>
@@ -294,6 +281,12 @@
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
 			<version>3.24.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-testlib</artifactId>
+			<version>23.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
