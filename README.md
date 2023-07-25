@@ -8,13 +8,4 @@ A package for useful java classes for jersey, including:
 * REST Resource for listings  
 * ConstraintViolationExceptionMapper for Validation errors.
 
-Make sure you have implementation for ```javax.el-api 3.0.0```, for that, 
-the following dependency can be used :
-
-```
-<dependency>
-    <groupId>org.glassfish</groupId>
-    <artifactId>javax.el</artifactId>
-   <version>3.0.0</version>
-</dependency>
-```
+Make sure you have implementation for ```jakarta.el-api```

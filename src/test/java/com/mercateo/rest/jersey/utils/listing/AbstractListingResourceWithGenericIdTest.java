@@ -15,22 +15,23 @@
  */
 package com.mercateo.rest.jersey.utils.listing;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.UUID;
 
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Application;
-
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
-import org.junit.Test;
+import org.glassfish.jersey.test.inmemory.InMemoryTestContainerFactory;
+import org.glassfish.jersey.test.spi.TestContainerException;
+import org.glassfish.jersey.test.spi.TestContainerFactory;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -42,6 +43,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mercateo.common.rest.schemagen.link.LinkMetaFactory;
 import com.mercateo.common.rest.schemagen.link.injection.LinkFactoryResourceConfig;
 
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Application;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -108,7 +112,7 @@ public class AbstractListingResourceWithGenericIdTest extends JerseyTest {
 
         ResourceConfig rs = new ResourceConfig();
         rs.register(TestBinder.forAllMocksOf(this));
-        rs.register(JacksonJaxbJsonProvider.class);
+        rs.register(JacksonJsonProvider.class);
         rs.register(TestResource.class);
         rs.property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, Boolean.TRUE);
         LinkFactoryResourceConfig.configure(rs);
@@ -130,16 +134,20 @@ public class AbstractListingResourceWithGenericIdTest extends JerseyTest {
         assertEquals(UUID_3, testJson.getId());
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testSummary_invalidId() {
-        TestJson testJson = target("test/notValidId/summary").request().get(TestJson.class);
-        assertEquals(UUID_2, testJson.getId());
+        assertThrows(BadRequestException.class, () -> {
+            TestJson testJson = target("test/notValidId/summary").request().get(TestJson.class);
+            assertEquals(UUID_2, testJson.getId());
+        });
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testGet_invalidId() {
-        TestJson testJson = target("test/notValidId").request().get(TestJson.class);
-        assertEquals(UUID_3, testJson.getId());
+        assertThrows(BadRequestException.class, () -> {
+            TestJson testJson = target("test/notValidId").request().get(TestJson.class);
+            assertEquals(UUID_3, testJson.getId());
+        });
     }
 
     @Test

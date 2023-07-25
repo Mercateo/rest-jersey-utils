@@ -15,8 +15,8 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
+import jakarta.ws.rs.core.Feature;
+import jakarta.ws.rs.core.FeatureContext;
 
 public class ExceptionMapperFeature implements Feature {
 

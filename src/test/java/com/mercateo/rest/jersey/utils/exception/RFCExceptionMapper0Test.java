@@ -15,16 +15,16 @@
  */
 package com.mercateo.rest.jersey.utils.exception;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.ServiceUnavailableException;
-import javax.ws.rs.core.Response;
-
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.testing.NullPointerTester;
+
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.ServiceUnavailableException;
+import jakarta.ws.rs.core.Response;
 
 public class RFCExceptionMapper0Test {
 
@@ -45,7 +45,7 @@ public class RFCExceptionMapper0Test {
 	@Test
 	public void testContentTypeHeader() throws Exception{
 		Response r = uut.toResponse(new BadRequestException());
-		Assertions.assertThat(r.getHeaderString("Content-Type")).isEqualTo("application/problem+json");
+		assertThat(r.getHeaderString("Content-Type")).isEqualTo("application/problem+json");
 	}
 
 	@Test

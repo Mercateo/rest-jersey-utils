@@ -15,22 +15,21 @@
  */
 package com.mercateo.rest.jersey.utils.cors;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URL;
+import java.util.List;
 
-import org.junit.Test;
-
-import jersey.repackaged.com.google.common.collect.Lists;
+import org.junit.jupiter.api.Test;
 
 public class OriginFilterTest {
 
 	@Test
 	public void testIsOriginAllowedString() throws Exception {
 
-		OriginFilter originFilter = new OriginFilter.Default(Lists.newArrayList(new URL("http://localhost:8080")),
-				Lists.newArrayList("0.0.0.0"));
+		OriginFilter originFilter = new OriginFilter.Default(List.of(new URL("http://localhost:8080")),
+				List.of("0.0.0.0"));
 		assertTrue(originFilter.isOriginAllowed("http://localhost:8080"));
 		assertTrue(originFilter.isOriginAllowed("http://0.0.0.0:8080"));
 
@@ -40,8 +39,8 @@ public class OriginFilterTest {
 
 	@Test
 	public void testIsOriginAllowedURL() throws Exception {
-		OriginFilter originFilter = new OriginFilter.Default(Lists.newArrayList(new URL("http://localhost:8080")),
-				Lists.newArrayList("0.0.0.0"));
+		OriginFilter originFilter = new OriginFilter.Default(List.of(new URL("http://localhost:8080")),
+				List.of("0.0.0.0"));
 		assertTrue(originFilter.isOriginAllowed(new URL("http://localhost:8080")));
 		assertTrue(originFilter.isOriginAllowed(new URL("http://0.0.0.0:8080")));
 

@@ -15,17 +15,17 @@
  */
 package com.mercateo.rest.jersey.utils.cors;
 
-import static org.junit.Assert.assertEquals;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MultivaluedMap;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Application;
+import jakarta.ws.rs.core.MultivaluedMap;
 
 public class AccessControlMaxAgeHeaderFilterIntegrationTest extends JerseyTest {
 	@Path("/")
